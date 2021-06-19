@@ -1,0 +1,29 @@
+{
+  "name": "digi-dungeon-api",
+  "version": "0.1.0",
+  "description": "API of digi dungeon's events, objects and other stuff.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepublish": "tsc | npm pack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spooky-nebula/digi-dungeon-api.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Pedro Pires",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spooky-nebula/digi-dungeon-api/issues"
+  },
+  "homepage": "https://github.com/spooky-nebula/digi-dungeon-api#readme",
+  "devDependencies": {
+    "typescript": "^4.3.4"
+  }
+}
