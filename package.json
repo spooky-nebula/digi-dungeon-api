@@ -4,11 +4,15 @@
   "description": "API of digi dungeon's events, objects and other stuff.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node dist-dev/tests/index.js",
     "build": "tsc",
     "watch": "tsc --watch",
-    "prepublish": "tsc | npm pack"
+    "prepublish": "tsc --project tsconfig.build.json  | npm pack"
   },
   "repository": {
     "type": "git",

@@ -3,10 +3,11 @@ import Event from "./event";
 import { TileGrid } from "./map";
 
 export default class Shard {
+    id: string;
     partyList: PartyMember[];
     map: TileGrid;
     gamelog: Event[];
-    getSimpleData(): SimpleShardData{
+    getSimpleData(): SimpleShardData {
         let data = new SimpleShardData();
         data.gamelog = this.gamelog;
         data.map = this.map;
@@ -15,6 +16,7 @@ export default class Shard {
     }
 
     constructor() {
+        this.id = "universal";
         this.partyList = [];
         this.map = new TileGrid();
         this.gamelog = [];
