@@ -1,12 +1,15 @@
 {
   "name": "digi-dungeon-api",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "API of digi dungeon's events, objects and other stuff.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "type": "module",
+  "type": "commonjs",
   "files": [
-    "dist"
+    "dist/",
+    "LICENSE",
+    "README.md",
+    "index.js"
   ],
   "scripts": {
     "test": "node dist-dev/tests/index.js",

@@ -1,108 +1,111 @@
-import { RollData } from "./util/diceRolling";
-import DrawingLine from "./map/drawingLine";
+import { RollData, RollRequestData } from './util/diceRolling';
+import DrawingLine from './map/drawingLine';
 
 export default class Event {
-    name: string;
-    sender: string;
+  name: string;
+  sender: string;
 
-    constructor(name: string, sender: string) {
-        this.name = name;
-        this.sender = sender;
-    }
+  constructor(name: string, sender: string) {
+    this.name = name;
+    this.sender = sender;
+  }
 }
 
 export class DiceRollRequestEvent extends Event {
-    constructor(sender: string) {
-        super("roll-dice-request", sender);
-    }
+  roll: RollRequestData;
+
+  constructor(sender: string) {
+    super('roll-dice-request', sender);
+    this.roll = new RollRequestData();
+  }
 }
 
 export class DiceRollEvent extends Event {
-    roll: RollData;
+  roll: RollData;
 
-    constructor(sender: string) {
-        super("roll-dice", sender);
-        this.roll = new RollData();
-    }
+  constructor(sender: string) {
+    super('roll-dice', sender);
+    this.roll = new RollData();
+  }
 }
 
 export class ChatMessageEvent extends Event {
-    text: string;
+  text: string;
 
-    constructor(sender: string) {
-        super("chat-text", sender);
-        this.text = "";
-    }
+  constructor(sender: string) {
+    super('chat-text', sender);
+    this.text = '';
+  }
 }
 
 export class DrawingAddEvent extends Event {
-    finishedLine: DrawingLine;
+  finishedLine: DrawingLine;
 
-    constructor(sender: string) {
-        super("drawing-add", sender);
-        this.finishedLine = new DrawingLine();
-    }
+  constructor(sender: string) {
+    super('drawing-add', sender);
+    this.finishedLine = new DrawingLine();
+  }
 }
 
 export class DrawingClearEvent extends Event {
-    all: boolean;
+  all: boolean;
 
-    constructor(sender: string) {
-        super("drawing-clear", sender);
-        this.all = true;
-    }
+  constructor(sender: string) {
+    super('drawing-clear', sender);
+    this.all = true;
+  }
 }
 
 export class DrawingUndoEvent extends Event {
-    constructor(sender: string) {
-        super("drawing-undo", sender);
-    }
+  constructor(sender: string) {
+    super('drawing-undo', sender);
+  }
 }
 
 export class EntityMoveEvent extends Event {
-    entityID: number;
+  entityID: number;
 
-    constructor(sender: string) {
-        super("entity-move", sender);
-        this.entityID = 0;
-    }
+  constructor(sender: string) {
+    super('entity-move', sender);
+    this.entityID = 0;
+  }
 }
 
 export class EntityCreateEvent extends Event {
-    constructor(sender: string) {
-        super("entity-create", sender);
-    }
+  constructor(sender: string) {
+    super('entity-create', sender);
+  }
 }
 
 export class EntityRemoveEvent extends Event {
-    entityID: number;
+  entityID: number;
 
-    constructor(sender: string) {
-        super("entity-remove", sender);
-        this.entityID = 0;
-    }
+  constructor(sender: string) {
+    super('entity-remove', sender);
+    this.entityID = 0;
+  }
 }
 
 export class EntityGrantPremissionEvent extends Event {
-    partyMemberID: number;
-    entityID: number;
-    permission: string;
+  partyMemberID: number;
+  entityID: number;
+  permission: string;
 
-    constructor(sender: string) {
-        super("entity-grant-permission", sender);
-        this.partyMemberID = 0;
-        this.entityID = 0;
-        this.permission = "m";
-    }
+  constructor(sender: string) {
+    super('entity-grant-permission', sender);
+    this.partyMemberID = 0;
+    this.entityID = 0;
+    this.permission = 'm';
+  }
 }
 
 export class GrantPremissionEvent extends Event {
-    partyMemberID: number;
-    permission: string;
+  partyMemberID: number;
+  permission: string;
 
-    constructor(sender: string) {
-        super("grant-permission", sender);
-        this.partyMemberID = 0;
-        this.permission = "c";
-    }
+  constructor(sender: string) {
+    super('grant-permission', sender);
+    this.partyMemberID = 0;
+    this.permission = 'c';
+  }
 }
