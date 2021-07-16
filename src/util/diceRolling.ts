@@ -28,16 +28,17 @@ export function roll(rollRequest: RollRequestData): Promise<RollData> {
       reject();
     }
 
+    let data = new RollData();
+    Object.assign(data, rollRequest);
+
     if (rollRequest.dieQuantity == 1) {
       console.log('dice singular');
       let roll = Math.floor(Math.random() * rollRequest.dieType + 1);
-      let data = new RollData();
       data.rolls = [roll];
       data.result = roll + rollRequest.modifier;
       resolve(data);
     } else {
       console.log('dice lot');
-      let data = new RollData();
       for (let i = 0; i < rollRequest.dieQuantity; i++) {
         let roll = Math.floor(Math.random() * rollRequest.dieType + 1);
         data.rolls.push(roll);
