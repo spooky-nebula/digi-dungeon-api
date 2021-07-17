@@ -7,13 +7,6 @@ export default class Shard {
   partyList: PartyMember[];
   map: TileGrid;
   gamelog: Event[];
-  getSimpleData(): SimpleShardData {
-    let data = new SimpleShardData();
-    data.gamelog = this.gamelog;
-    data.map = this.map;
-    data.partyList = this.partyList;
-    return data;
-  }
 
   constructor() {
     this.id = 'universal';
@@ -29,10 +22,10 @@ export class SimpleShardData {
   map: TileGrid;
   gamelog: Event[];
 
-  constructor() {
-    this.id = 'universal';
-    this.partyList = [];
-    this.map = new TileGrid();
-    this.gamelog = [];
+  constructor(shard?: Shard) {
+    this.id = shard?.id || 'universal';
+    this.partyList = shard?.partyList || [];
+    this.map = shard?.map || new TileGrid();
+    this.gamelog = shard?.gamelog || [];
   }
 }
