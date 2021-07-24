@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 export class RollRequestData {
   dieQuantity: number;
   modifier: number;
@@ -31,22 +33,14 @@ export function roll(rollRequest: RollRequestData): Promise<RollData> {
     let data = new RollData();
     Object.assign(data, rollRequest);
 
-    if (rollRequest.dieQuantity == 1) {
-      console.log('dice singular');
-      let roll = Math.floor(Math.random() * rollRequest.dieType + 1);
-      data.rolls = [roll];
-      data.result = roll + rollRequest.modifier;
-      resolve(data);
-    } else {
-      console.log('dice lot');
-      for (let i = 0; i < rollRequest.dieQuantity; i++) {
-        let roll = Math.floor(Math.random() * rollRequest.dieType + 1);
-        data.rolls.push(roll);
-        data.result += roll;
-        if (i + 1 == rollRequest.dieQuantity) {
-          data.result += rollRequest.modifier;
-          resolve(data);
-        }
+    for (let i = 0; i < rollRequest.dieQuantity; i++) {
+      let bytes = crypto.randomBytes(rollRequest.dieQuantity);
+      let roll = Math.floor((bytes.readUInt8(i) % rollRequest.dieType) + 1);
+      data.rolls.push(roll);
+      data.result += roll;
+      if (i + 1 == rollRequest.dieQuantity) {
+        data.result += rollRequest.modifier;
+        resolve(data);
       }
     }
   });
