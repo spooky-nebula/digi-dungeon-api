@@ -1,5 +1,5 @@
-import * as dice from './diceRolling'
-import * as struct from './structs'
-import * as math from './math'
+import * as dice from './dicerolling';
+import * as struct from './structs';
+import * as math from './math';
 
-export {dice, struct, math};
+export { dice, struct, math };

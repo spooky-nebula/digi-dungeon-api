@@ -1,5 +1,5 @@
-import DrawingLine from "./drawingLine";
-import TileGrid from "./tileGrid";
-import Tile from "./tile";
+import DrawingLine from './drawingline';
+import TileGrid from './tilegrid';
+import Tile from './tile';
 
-export {DrawingLine, TileGrid, Tile}
+export { DrawingLine, TileGrid, Tile };

@@ -1,7 +1,12 @@
-import { RollData, RollRequestData } from './util/diceRolling';
-import DrawingLine from './map/drawingLine';
+import { RollData, RollRequestData } from './util/dicerolling';
+import DrawingLine from './map/drawingline';
 
-export default class Event {
+interface Event {
+  name: string;
+  sender: string;
+}
+
+class Event implements Event {
   name: string;
   sender: string;
 
@@ -11,7 +16,13 @@ export default class Event {
   }
 }
 
-export class DiceRollRequestEvent extends Event {
+export default Event;
+
+interface DiceRollRequestEvent extends Event {
+  roll: RollRequestData;
+}
+
+class DiceRollRequestEvent extends Event implements DiceRollRequestEvent {
   roll: RollRequestData;
 
   constructor(sender: string) {
@@ -20,7 +31,11 @@ export class DiceRollRequestEvent extends Event {
   }
 }
 
-export class DiceRollEvent extends Event {
+interface DiceRollEvent extends Event {
+  roll: RollData;
+}
+
+class DiceRollEvent extends Event implements DiceRollEvent {
   roll: RollData;
 
   constructor(sender: string) {
@@ -29,7 +44,11 @@ export class DiceRollEvent extends Event {
   }
 }
 
-export class ChatMessageEvent extends Event {
+interface ChatMessageEvent extends Event {
+  text: string;
+}
+
+class ChatMessageEvent extends Event implements ChatMessageEvent {
   text: string;
 
   constructor(sender: string) {
@@ -38,7 +57,11 @@ export class ChatMessageEvent extends Event {
   }
 }
 
-export class DrawingAddEvent extends Event {
+interface DrawingAddEvent extends Event {
+  finishedLine: DrawingLine;
+}
+
+class DrawingAddEvent extends Event implements DrawingAddEvent {
   finishedLine: DrawingLine;
 
   constructor(sender: string) {
@@ -47,7 +70,11 @@ export class DrawingAddEvent extends Event {
   }
 }
 
-export class DrawingClearEvent extends Event {
+interface DrawingClearEvent extends Event {
+  all: boolean;
+}
+
+class DrawingClearEvent extends Event implements DrawingClearEvent {
   all: boolean;
 
   constructor(sender: string) {
@@ -56,13 +83,19 @@ export class DrawingClearEvent extends Event {
   }
 }
 
-export class DrawingUndoEvent extends Event {
+interface DrawingUndoEvent extends Event {}
+
+class DrawingUndoEvent extends Event implements DrawingUndoEvent {
   constructor(sender: string) {
     super('drawing-undo', sender);
   }
 }
 
-export class EntityMoveEvent extends Event {
+interface EntityMoveEvent extends Event {
+  entityID: number;
+}
+
+class EntityMoveEvent extends Event implements EntityMoveEvent {
   entityID: number;
 
   constructor(sender: string) {
@@ -71,13 +104,19 @@ export class EntityMoveEvent extends Event {
   }
 }
 
-export class EntityCreateEvent extends Event {
+interface EntityCreateEvent extends Event {}
+
+class EntityCreateEvent extends Event implements EntityCreateEvent {
   constructor(sender: string) {
     super('entity-create', sender);
   }
 }
 
-export class EntityRemoveEvent extends Event {
+interface EntityRemoveEvent extends Event {
+  entityID: number;
+}
+
+class EntityRemoveEvent extends Event implements EntityRemoveEvent {
   entityID: number;
 
   constructor(sender: string) {
@@ -86,7 +125,16 @@ export class EntityRemoveEvent extends Event {
   }
 }
 
-export class EntityGrantPremissionEvent extends Event {
+interface EntityGrantPermissionEvent extends Event {
+  partyMemberID: number;
+  entityID: number;
+  permission: string;
+}
+
+class EntityGrantPermissionEvent
+  extends Event
+  implements EntityGrantPermissionEvent
+{
   partyMemberID: number;
   entityID: number;
   permission: string;
@@ -99,7 +147,12 @@ export class EntityGrantPremissionEvent extends Event {
   }
 }
 
-export class GrantPremissionEvent extends Event {
+interface GrantPermissionEvent extends Event {
+  partyMemberID: number;
+  permission: string;
+}
+
+class GrantPermissionEvent extends Event implements GrantPermissionEvent {
   partyMemberID: number;
   permission: string;
 
@@ -109,3 +162,17 @@ export class GrantPremissionEvent extends Event {
     this.permission = 'c';
   }
 }
+
+export {
+  DiceRollRequestEvent,
+  DiceRollEvent,
+  ChatMessageEvent,
+  DrawingAddEvent,
+  DrawingClearEvent,
+  DrawingUndoEvent,
+  EntityMoveEvent,
+  EntityCreateEvent,
+  EntityRemoveEvent,
+  EntityGrantPermissionEvent,
+  GrantPermissionEvent
+};

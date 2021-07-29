@@ -1,6 +1,12 @@
 import crypto from 'crypto';
 
-export class RollRequestData {
+interface RollRequestData {
+  dieQuantity: number;
+  modifier: number;
+  dieType: number;
+}
+
+class RollRequestData implements RollRequestData {
   dieQuantity: number;
   modifier: number;
   dieType: number;
@@ -12,7 +18,12 @@ export class RollRequestData {
   }
 }
 
-export class RollData extends RollRequestData {
+interface RollData extends RollRequestData {
+  rolls: number[];
+  result: number;
+}
+
+class RollData extends RollRequestData implements RollData {
   rolls: number[];
   result: number;
 
@@ -23,7 +34,7 @@ export class RollData extends RollRequestData {
   }
 }
 
-export function roll(rollRequest: RollRequestData): Promise<RollData> {
+function roll(rollRequest: RollRequestData): Promise<RollData> {
   return new Promise((resolve, reject) => {
     if (rollRequest.dieQuantity > 69) {
       console.log('too many dice rolled');
@@ -33,8 +44,9 @@ export function roll(rollRequest: RollRequestData): Promise<RollData> {
     let data = new RollData();
     Object.assign(data, rollRequest);
 
+    let bytes = crypto.randomBytes(rollRequest.dieQuantity);
+
     for (let i = 0; i < rollRequest.dieQuantity; i++) {
-      let bytes = crypto.randomBytes(rollRequest.dieQuantity);
       let roll = Math.floor((bytes.readUInt8(i) % rollRequest.dieType) + 1);
       data.rolls.push(roll);
       data.result += roll;
@@ -45,3 +57,5 @@ export function roll(rollRequest: RollRequestData): Promise<RollData> {
     }
   });
 }
+
+export { RollRequestData, RollData, roll };

@@ -1,12 +1,12 @@
-import { roll, RollRequestData } from '../util/diceRolling';
+import { roll, RollRequestData } from '../util/dicerolling';
 import * as ddapi from '../index';
 
 export default function Test() {
-  let diceRequest = new RollRequestData();
-
-  diceRequest.dieQuantity = 2;
-  diceRequest.dieType = 12;
-  diceRequest.modifier = 3;
+  let diceRequest: RollRequestData = {
+    dieQuantity: 2,
+    dieType: 12,
+    modifier: 3
+  };
 
   let diceRollResult = roll(diceRequest);
 
@@ -19,6 +19,13 @@ export default function Test() {
       console.error('Dice Rolling failed miserably');
     }
   });
+
+  try {
+    let sheet = new ddapi.E5.Sheet.Sheet();
+    console.log(sheet);
+  } catch (error) {
+    console.error('Sheet creation failed successfully');
+  }
 
   console.log('Tests successful');
 }
