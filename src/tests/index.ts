@@ -22,7 +22,6 @@ export default function Test() {
 
   try {
     let sheet = new ddapi.E5.Sheet.Sheet();
-    console.log(sheet);
   } catch (error) {
     console.error('Sheet creation failed successfully');
   }
