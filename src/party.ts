@@ -1,11 +1,16 @@
-export default class PartyMember {
-  playerID: number;
+interface PartyMember {
+  playerID: string;
   userID: string;
-  partyID: number;
+  permissions: string;
+}
 
+class PartyMember {
   constructor() {
-    this.playerID = -1;
+    this.playerID = '';
     this.userID = '';
-    this.partyID = -1;
+    this.permissions = '';
   }
 }
+
+export default PartyMember;
+export { PartyMember };

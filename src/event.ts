@@ -4,27 +4,25 @@ import DrawingLine from './map/drawingline';
 interface Event {
   name: string;
   sender: string;
+  timestamp: number;
 }
 
-class Event implements Event {
-  name: string;
-  sender: string;
-
-  constructor(name: string, sender: string) {
+class Event {
+  constructor(name: string, sender: string, timestamp?: number) {
     this.name = name;
     this.sender = sender;
+    this.timestamp = timestamp || Date.now();
   }
 }
 
 export default Event;
+export { Event };
 
 interface DiceRollRequestEvent extends Event {
   roll: RollRequestData;
 }
 
-class DiceRollRequestEvent extends Event implements DiceRollRequestEvent {
-  roll: RollRequestData;
-
+class DiceRollRequestEvent extends Event {
   constructor(sender: string) {
     super('roll-dice-request', sender);
     this.roll = new RollRequestData();
@@ -35,9 +33,7 @@ interface DiceRollEvent extends Event {
   roll: RollData;
 }
 
-class DiceRollEvent extends Event implements DiceRollEvent {
-  roll: RollData;
-
+class DiceRollEvent extends Event {
   constructor(sender: string) {
     super('roll-dice', sender);
     this.roll = new RollData();
@@ -48,9 +44,7 @@ interface ChatMessageEvent extends Event {
   text: string;
 }
 
-class ChatMessageEvent extends Event implements ChatMessageEvent {
-  text: string;
-
+class ChatMessageEvent extends Event {
   constructor(sender: string) {
     super('chat-text', sender);
     this.text = '';
@@ -61,9 +55,7 @@ interface DrawingAddEvent extends Event {
   finishedLine: DrawingLine;
 }
 
-class DrawingAddEvent extends Event implements DrawingAddEvent {
-  finishedLine: DrawingLine;
-
+class DrawingAddEvent extends Event {
   constructor(sender: string) {
     super('drawing-add', sender);
     this.finishedLine = new DrawingLine();
@@ -74,9 +66,7 @@ interface DrawingClearEvent extends Event {
   all: boolean;
 }
 
-class DrawingClearEvent extends Event implements DrawingClearEvent {
-  all: boolean;
-
+class DrawingClearEvent extends Event {
   constructor(sender: string) {
     super('drawing-clear', sender);
     this.all = true;
@@ -85,7 +75,7 @@ class DrawingClearEvent extends Event implements DrawingClearEvent {
 
 interface DrawingUndoEvent extends Event {}
 
-class DrawingUndoEvent extends Event implements DrawingUndoEvent {
+class DrawingUndoEvent extends Event {
   constructor(sender: string) {
     super('drawing-undo', sender);
   }
@@ -95,9 +85,7 @@ interface EntityMoveEvent extends Event {
   entityID: number;
 }
 
-class EntityMoveEvent extends Event implements EntityMoveEvent {
-  entityID: number;
-
+class EntityMoveEvent extends Event {
   constructor(sender: string) {
     super('entity-move', sender);
     this.entityID = 0;
@@ -106,7 +94,7 @@ class EntityMoveEvent extends Event implements EntityMoveEvent {
 
 interface EntityCreateEvent extends Event {}
 
-class EntityCreateEvent extends Event implements EntityCreateEvent {
+class EntityCreateEvent extends Event {
   constructor(sender: string) {
     super('entity-create', sender);
   }
@@ -116,9 +104,7 @@ interface EntityRemoveEvent extends Event {
   entityID: number;
 }
 
-class EntityRemoveEvent extends Event implements EntityRemoveEvent {
-  entityID: number;
-
+class EntityRemoveEvent extends Event {
   constructor(sender: string) {
     super('entity-remove', sender);
     this.entityID = 0;
@@ -131,14 +117,7 @@ interface EntityGrantPermissionEvent extends Event {
   permission: string;
 }
 
-class EntityGrantPermissionEvent
-  extends Event
-  implements EntityGrantPermissionEvent
-{
-  partyMemberID: number;
-  entityID: number;
-  permission: string;
-
+class EntityGrantPermissionEvent extends Event {
   constructor(sender: string) {
     super('entity-grant-permission', sender);
     this.partyMemberID = 0;
@@ -152,10 +131,7 @@ interface GrantPermissionEvent extends Event {
   permission: string;
 }
 
-class GrantPermissionEvent extends Event implements GrantPermissionEvent {
-  partyMemberID: number;
-  permission: string;
-
+class GrantPermissionEvent extends Event {
   constructor(sender: string) {
     super('grant-permission', sender);
     this.partyMemberID = 0;

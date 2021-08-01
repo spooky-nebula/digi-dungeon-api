@@ -6,7 +6,7 @@ interface RollRequestData {
   dieType: number;
 }
 
-class RollRequestData implements RollRequestData {
+class RollRequestData {
   dieQuantity: number;
   modifier: number;
   dieType: number;
@@ -23,7 +23,7 @@ interface RollData extends RollRequestData {
   result: number;
 }
 
-class RollData extends RollRequestData implements RollData {
+class RollData extends RollRequestData {
   rolls: number[];
   result: number;
 
