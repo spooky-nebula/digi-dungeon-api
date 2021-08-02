@@ -7,15 +7,10 @@ interface DrawingLine {
   lineWidth: number;
 }
 
-class DrawingLine implements DrawingLine {
-  origin: struct.Vector2;
-  points: DrawingPoint[];
-  colour: string;
-  lineWidth: number;
-
+class DrawingLine {
   constructor() {
     this.origin = { x: 0, y: 0 };
-    this.points = [];
+    this.point = [];
     this.colour = 'black';
     this.lineWidth = 3;
   }
@@ -24,17 +19,11 @@ class DrawingLine implements DrawingLine {
 export default DrawingLine;
 
 interface DrawingPoint extends struct.Vector2 {
-  colour: string;
+  colour: string; // Needs performance testing to be implemented
   width: number;
 }
 
-class DrawingPoint implements DrawingPoint {
-  // Needs performance testing to be implemented
-  colour: string;
-  width: number;
-  x: number;
-  y: number;
-
+class DrawingPoint {
   constructor() {
     this.x = 0;
     this.y = 0;

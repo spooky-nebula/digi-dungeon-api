@@ -1,18 +1,22 @@
 import { SimpleShardData } from '../shard';
 
-class HandshakeData {
+interface HandshakeData {
   token: string;
   shardID: string;
+}
 
+class HandshakeData {
   constructor(token: string, shardID: string) {
     this.token = token;
     this.shardID = shardID;
   }
 }
 
-class HandshakeResponseData {
+interface HandshakeResponseData {
   shardData: SimpleShardData;
+}
 
+class HandshakeResponseData {
   constructor(shardData: SimpleShardData) {
     this.shardData = shardData;
   }
