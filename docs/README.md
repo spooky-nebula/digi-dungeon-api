@@ -143,6 +143,8 @@ for **digi-dungeon-client**.
 
 ## Login
 
+@SectionWIP
+
 When the client logs onto the server
 
 ## Handshake
