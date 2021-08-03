@@ -133,3 +133,109 @@ interface SavingScore {
 }
 
 export { AbilityScore, SkillScore, SavingScore };
+
+interface BasicSheet {
+  characterName: string;
+  id: string;
+  version: string;
+  info: {
+    class: string;
+    background: string;
+    race: string;
+    alignment: string;
+    experiencePoints: number;
+  };
+  basic: {
+    armourClass: number;
+    initiative: number;
+    speed: number;
+    maxhp: number;
+    hp: number;
+    extrahp: number;
+    inspiration: boolean;
+    proficiencyBonus: number;
+  };
+  passives: {
+    perception: number;
+    investigation: number;
+    insight: number;
+  };
+  ability: Map<Ability, AbilityScore>;
+  saving: Map<Ability, SavingScore>;
+  skill: Map<Skill, SkillScore>;
+  description: {
+    personalityTraits: string;
+    ideals: string;
+    bonds: string;
+    flaws: string;
+    appearance: string;
+  };
+  notes: {
+    backstory: string[];
+    allies: string[];
+    organizations: string[];
+    enemies: string[];
+  };
+  extras: string[];
+  inventory: string[];
+  spells: string[];
+  traits: string[];
+  features: string[];
+  actions: string[];
+  conditions: string[];
+  resistances: string[];
+}
+
+class BasicSheet {
+  constructor() {
+    this.characterName = '';
+    this.version = '';
+    this.info = {
+      class: 'paladin',
+      background: '',
+      race: 'human',
+      alignment: 'Neutral',
+      experiencePoints: 0
+    };
+    this.basic = {
+      armourClass: 0,
+      initiative: 0,
+      speed: 0,
+      maxhp: 0,
+      hp: 0,
+      extrahp: 0,
+      inspiration: false,
+      proficiencyBonus: 0
+    };
+    this.passives = {
+      perception: 0,
+      investigation: 0,
+      insight: 0
+    };
+    this.ability = new Map<Ability, AbilityScore>();
+    this.saving = new Map<Ability, SavingScore>();
+    this.skill = new Map<Skill, SkillScore>();
+    this.description = {
+      personalityTraits: '',
+      ideals: '',
+      bonds: '',
+      flaws: '',
+      appearance: ''
+    };
+    this.notes = {
+      backstory: [],
+      allies: [],
+      organizations: [],
+      enemies: []
+    };
+    this.extras = [];
+    this.inventory = [];
+    this.spells = [];
+    this.traits = [];
+    this.features = [];
+    this.conditions = [];
+    this.resistances = [];
+  }
+}
+
+export { BasicSheet };
