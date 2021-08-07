@@ -21,8 +21,6 @@ undocumented Homebrew and what it contains (hehe contains hehe).
 
 ## How is stuff stored
 
-@SectionWIP
-
 Character Sheets, _CS_ for short today, are the first object where all data can
 be found from. By this, I mean that whatever else you need can be accessed
 through an ID in the _CS_ being some sort of relational object.

@@ -143,9 +143,33 @@ for **digi-dungeon-client**.
 
 ## Login
 
-@SectionWIP
+@SubjectToChange // Security is always evolving
 
-When the client logs onto the server
+For the client to do any authentication work on the server, they need to follow
+the next interfaces in the request body:
+
+```typescript
+interface UserRegisterData {...} // POST /register
+interface UserLoginData {...} // POST /login
+interface UserLogoutData {...} // POST /logout
+```
+
+The information about these structures can be found in
+[**userdata.ts**](/src/auth/userdata.ts)
+
+Only then will the server answer with a success (if the transaction was
+successful) along with a token (or a message on why the transaction was not a
+success). This response is structured like the next code block.
+
+```typescript
+interface AuthRequestResponse {
+  success: boolean;
+  token?: string;
+}
+```
+
+In the official server the passwords are salted and hashed so no-one keeps your
+password ever.
 
 ## Handshake
 
