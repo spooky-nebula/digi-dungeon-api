@@ -1,5 +1,6 @@
 import { RollData, RollRequestData } from './util/dicerolling';
 import DrawingLine from './map/drawingline';
+import { Vector2 } from './util/structs';
 
 interface Event {
   name: string;
@@ -83,20 +84,39 @@ class DrawingUndoEvent extends Event {
 
 interface EntityMoveEvent extends Event {
   entityID: number;
+  position: Vector2;
 }
 
 class EntityMoveEvent extends Event {
   constructor(sender: string) {
     super('entity-move', sender);
     this.entityID = 0;
+    this.position = { x: 0, y: 0 };
   }
 }
 
-interface EntityCreateEvent extends Event {}
+interface EntityCreateEvent extends Event {
+  entityID: number;
+  newEntityData: any;
+}
 
 class EntityCreateEvent extends Event {
   constructor(sender: string) {
     super('entity-create', sender);
+    this.entityID = 0;
+    this.newEntityData = {};
+  }
+}
+
+interface EntityModifyEvent<T> extends Event {
+  entityID: number;
+  newEntityData?: T;
+}
+
+class EntityModifyEvent<T> extends Event {
+  constructor(sender: string) {
+    super('entity-modify', sender);
+    this.entityID = 0;
   }
 }
 
@@ -147,6 +167,7 @@ export {
   DrawingClearEvent,
   DrawingUndoEvent,
   EntityMoveEvent,
+  EntityModifyEvent,
   EntityCreateEvent,
   EntityRemoveEvent,
   EntityGrantPermissionEvent,
