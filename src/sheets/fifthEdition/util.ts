@@ -21,6 +21,7 @@ interface ResistanceID extends BrewID {}
 declare type Locality = 'Local' | 'Server';
 
 export {
+  BrewID,
   ClassID,
   RaceID,
   ItemID,

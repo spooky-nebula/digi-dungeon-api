@@ -1,6 +1,6 @@
 {
   "name": "digi-dungeon-api",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "API of digi dungeon's events, objects and other stuff.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
