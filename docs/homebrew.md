@@ -106,6 +106,21 @@ interface CharacterDescriptor {
 From here the _CS_ can actually start getting populated with its various
 stats.
 
+Possible data structures are described by the type `HomebrewElement`:
+
+```typescript
+declare type HomebrewElement =
+  | Action
+  | Class
+  | Condition
+  | Feature
+  | Race
+  | Item
+  | Resistance
+  | Trait
+  | Spell;
+```
+
 Now here is where we get knee deep into relational data objects. There's no
 going back after seeing this. If you are not prepared don't read any longer.
 

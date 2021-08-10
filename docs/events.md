@@ -29,13 +29,14 @@ interface Event {
 
 @SubjectToChange // This isn't really tested or worked on so good luck
 
-| Interface Name             | Event Name                  | Parameters                                                       | Notes                                                                           |
-| -------------------------- | --------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Interface Name             | Event Name                  | Parameters                                                       | Notes |
+| -------------------------- | --------------------------- | ---------------------------------------------------------------- | ----- |
 | DrawingAddEvent            | `'drawing-add'`             | `{finishedLine: DrawingLine}`                                    |
 | DrawingUndoEvent           | `'drawing-clear'`           | `{all: boolean}`                                                 |
 | DrawingClearEvent          | `'drawing-undo'`            | `{}`                                                             |
 | EntityMoveEvent            | `'entity-move'`             | `{entityID: number}`                                             |
-| EntityCreateEvent          | `'entity-create'`           | `{}`                                                             | I think later this will have some entity data or something later? I'm not sure. |
+| EntityCreateEvent&lt;T&gt; | `'entity-create'`           | `{entityID: number, newEntityData?: T}`                          |       |
+| EntityModifyEvent&lt;T&gt; | `'entity-modify'`           | `{entityID: number, newEntityData?: T}`                          |       |
 | EntityRemoveEvent          | `'entity-remove'`           | `{entityID: number}`                                             |
 | EntityGrantPermissionEvent | `'entity-grant-permission'` | `{partyMemberID: number; entityID: number; permission: string;}` |
 | GrantPermissionEvent       | `'grant-permission'`        | `{partyMemberID: number; permission: string;}`                   |
