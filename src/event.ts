@@ -19,6 +19,7 @@ class Event {
 export default Event;
 export { Event };
 
+//#region Dice Rolling Related
 interface DiceRollRequestEvent extends Event {
   roll: RollRequestData;
 }
@@ -40,7 +41,8 @@ class DiceRollEvent extends Event {
     this.roll = new RollData();
   }
 }
-
+//#endregion
+//#region Chat Related
 interface ChatMessageEvent extends Event {
   text: string;
 }
@@ -51,7 +53,8 @@ class ChatMessageEvent extends Event {
     this.text = '';
   }
 }
-
+//#endregion
+//#region Board Related
 interface DrawingAddEvent extends Event {
   finishedLine: DrawingLine;
 }
@@ -95,16 +98,15 @@ class EntityMoveEvent extends Event {
   }
 }
 
-interface EntityCreateEvent extends Event {
+interface EntityCreateEvent<T> extends Event {
   entityID: number;
-  newEntityData: any;
+  newEntityData?: T;
 }
 
-class EntityCreateEvent extends Event {
+class EntityCreateEvent<T> extends Event {
   constructor(sender: string) {
     super('entity-create', sender);
     this.entityID = 0;
-    this.newEntityData = {};
   }
 }
 
@@ -130,7 +132,8 @@ class EntityRemoveEvent extends Event {
     this.entityID = 0;
   }
 }
-
+//#endregion
+//#region Permission Related
 interface EntityGrantPermissionEvent extends Event {
   partyMemberID: number;
   entityID: number;
@@ -158,6 +161,7 @@ class GrantPermissionEvent extends Event {
     this.permission = 'c';
   }
 }
+//#endregion
 
 export {
   DiceRollRequestEvent,
