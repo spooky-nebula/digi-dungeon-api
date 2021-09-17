@@ -18,6 +18,10 @@ function isOdd(n: number): boolean {
 
 export { isOdd };
 
+//#region Coordinate Maths
+
+//#region Converting Coordinate Systems
+
 /**
  * Converts a cubic coordinate into an axial coordinate.
  * This is for hexagon-based maps
@@ -44,6 +48,10 @@ function axialToCubic(vector: Vector2): Vector3 {
 }
 
 export { cubicToAxial, axialToCubic };
+
+//#endregion
+
+//#region Cubic Coordinate Maths
 
 /** Standard cubic directions */
 type CubicDirection =
@@ -199,6 +207,10 @@ export {
   cubicDiagonals
 };
 
+//#endregion
+
+//#region Axial Coordinate Maths
+
 /** Standard axial directions */
 type AxialDirection =
   | { x: 1; y: 0 }
@@ -351,3 +363,7 @@ export {
   axialDiagonal,
   axialDiagonals
 };
+
+//#endregion
+
+//#endregion
