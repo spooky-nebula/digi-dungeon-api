@@ -16,7 +16,34 @@ function isOdd(n: number): boolean {
   return (n | 1) == n;
 }
 
-export { isOdd };
+function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
+}
+
+function vector3lerp(a: Vector3, b: Vector3, t: number): Vector3 {
+  return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t), z: lerp(a.z, b.z, t) };
+}
+
+function vector3round(vector: Vector3): Vector3 {
+  return {
+    x: Math.round(vector.x),
+    y: Math.round(vector.y),
+    z: Math.round(vector.z)
+  };
+}
+
+function vector2lerp(a: Vector2, b: Vector2, t: number): Vector2 {
+  return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) };
+}
+
+function vector2round(vector: Vector2): Vector2 {
+  return {
+    x: Math.round(vector.x),
+    y: Math.round(vector.y)
+  };
+}
+
+export { isOdd, lerp, vector3lerp, vector3round, vector2lerp, vector2round };
 
 //#region Coordinate Maths
 
@@ -191,20 +218,41 @@ function cubicDiagonals(vector: Vector3): Vector3[] {
   return result;
 }
 
+function cubicDistance(vector1: Vector3, vector2: Vector3): number {
+  return Math.max(
+    Math.abs(vector1.x - vector2.x),
+    Math.abs(vector1.y - vector2.y),
+    Math.abs(vector1.z - vector2.z)
+  );
+}
+
+function cubicLine(vector1: Vector3, vector2: Vector3): Vector3[] {
+  let distance = cubicDistance(vector1, vector2);
+  let result: Vector3[] = new Array(distance);
+  for (let i = 0; i < distance; i++) {
+    result[i] = vector3round(vector3lerp(vector1, vector2, (1 / distance) * i));
+  }
+  return result;
+}
+
 export {
+  // Types
   CubicDirection,
   CubicDirectionList,
   CubicDirectionsPointy,
   CubicDirectionsFlat,
-  cubicAdd,
-  cubicNeighbor,
-  cubicNeighbors,
   CubicDiagonal,
   CubicDiagonalList,
   CubicDiagonalsPointy,
   CubicDiagonalsFlat,
+  // Functions
+  cubicAdd,
+  cubicNeighbor,
+  cubicNeighbors,
   cubicDiagonal,
-  cubicDiagonals
+  cubicDiagonals,
+  cubicDistance,
+  cubicLine
 };
 
 //#endregion
@@ -348,20 +396,40 @@ function axialDiagonals(vector: Vector2): Vector2[] {
   return result;
 }
 
+function axialDistance(vector1: Vector2, vector2: Vector2): number {
+  let vector1c = axialToCubic(vector1);
+  let vector2c = axialToCubic(vector2);
+  return cubicDistance(vector1c, vector2c);
+}
+
+// WARNING: UNTESTED FUNCTION
+function axialLine(vector1: Vector2, vector2: Vector2): Vector2[] {
+  let distance = axialDistance(vector1, vector2);
+  let result: Vector2[] = new Array(distance);
+  for (let i = 0; i < distance; i++) {
+    result[i] = vector2round(vector2lerp(vector1, vector2, (1 / distance) * i));
+  }
+  return result;
+}
+
 export {
+  // Types
   AxialDirection,
   AxialDirectionList,
   AxialDirectionsPointy,
   AxialDirectionsFlat,
-  axialNeighbor,
-  axialAdd,
-  axialNeighbors,
   AxialDiagonal,
   AxialDiagonalList,
   AxialDiagonalsPointy,
   AxialDiagonalsFlat,
+  // Functions
+  axialNeighbor,
+  axialAdd,
+  axialNeighbors,
   axialDiagonal,
-  axialDiagonals
+  axialDiagonals,
+  axialDistance,
+  axialLine
 };
 
 //#endregion
