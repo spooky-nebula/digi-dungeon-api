@@ -7,6 +7,7 @@ interface TileGrid {
   seaLevel: number;
 }
 
+/** @deprecated Replaced with HexGrid<T> */
 class TileGrid {
   constructor(width: number = 20, height: number = 20, seaLevel: number = 0) {
     this.tile = [];
