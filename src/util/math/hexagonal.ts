@@ -1,49 +1,5 @@
-import { Vector2, Vector3 } from './structs';
-
-/***
- * Returns true if the number given is odd, false otherwise.
- *
- * When given a float, double or any decimal number, the method used is the
- * modulo `%2` method.
- *
- * When given an interger, bit manipulation will be used instead.
- * @returns boolean
- */
-function isOdd(n: number): boolean {
-  if (Number.isInteger(n)) {
-    return n % 2 == 1;
-  }
-  return (n | 1) == n;
-}
-
-function lerp(a: number, b: number, t: number): number {
-  return a + (b - a) * t;
-}
-
-function vector3lerp(a: Vector3, b: Vector3, t: number): Vector3 {
-  return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t), z: lerp(a.z, b.z, t) };
-}
-
-function vector3round(vector: Vector3): Vector3 {
-  return {
-    x: Math.round(vector.x),
-    y: Math.round(vector.y),
-    z: Math.round(vector.z)
-  };
-}
-
-function vector2lerp(a: Vector2, b: Vector2, t: number): Vector2 {
-  return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) };
-}
-
-function vector2round(vector: Vector2): Vector2 {
-  return {
-    x: Math.round(vector.x),
-    y: Math.round(vector.y)
-  };
-}
-
-export { isOdd, lerp, vector3lerp, vector3round, vector2lerp, vector2round };
+import { Vector2, Vector3 } from '../structs';
+import { vector2lerp, vector2round, vector3lerp, vector3round } from './basic';
 
 //#region Coordinate Maths
 
@@ -144,6 +100,34 @@ function cubicAdd(vector1: Vector3, vector2: Vector3): Vector3 {
 }
 
 /**
+ * Subtracts a vector from an origin coordinate
+ * @param vector1 Origin Coordinate
+ * @param vector2 Vector to subtract
+ * @returns Resulting Coordinate
+ */
+function cubicSubtract(vector1: Vector3, vector2: Vector3): Vector3 {
+  return {
+    x: vector1.x - vector2.x,
+    y: vector1.y - vector2.y,
+    z: vector1.z - vector2.z
+  };
+}
+
+/**
+ * Multiplies the origin coordinate by the vector given
+ * @param vector1 Origin Coordinate
+ * @param vector2 Vector to multiply by
+ * @returns Resulting Coordinate
+ */
+function cubicMultiply(vector1: Vector3, vector2: Vector3): Vector3 {
+  return {
+    x: vector1.x * vector2.x,
+    y: vector1.y * vector2.y,
+    z: vector1.z * vector2.z
+  };
+}
+
+/**
  * Returns an array of adjecent coordinates
  * @param vector Origin Coordinate
  * @returns Array of all the neighboring coordinates
@@ -218,6 +202,12 @@ function cubicDiagonals(vector: Vector3): Vector3[] {
   return result;
 }
 
+/**
+ * Calculates the distance between the origin and destination coordinates
+ * @param vector1 Origin Coordinate
+ * @param vector2 Destination Coordinate
+ * @returns Resulting Distance
+ */
 function cubicDistance(vector1: Vector3, vector2: Vector3): number {
   return Math.max(
     Math.abs(vector1.x - vector2.x),
@@ -247,6 +237,8 @@ export {
   CubicDiagonalsFlat,
   // Functions
   cubicAdd,
+  cubicSubtract,
+  cubicMultiply,
   cubicNeighbor,
   cubicNeighbors,
   cubicDiagonal,
@@ -309,7 +301,7 @@ function axialNeighbor(vector: Vector2, direction: AxialDirection): Vector2 {
 }
 
 /**
- * Adds a vector to a origin coordinate
+ * Adds a vector to an origin coordinate
  * @param vector1 Origin Coordinate
  * @param vector2 Vector to add
  * @returns Resulting Coordinate
@@ -318,6 +310,32 @@ function axialAdd(vector1: Vector2, vector2: Vector2): Vector2 {
   return {
     x: vector1.x + vector2.x,
     y: vector1.y + vector2.y
+  };
+}
+
+/**
+ * Subtracts a vector from an origin coordinate
+ * @param vector1 Origin Coordinate
+ * @param vector2 Vector to subtract
+ * @returns Resulting Coordinate
+ */
+function axialSubtract(vector1: Vector2, vector2: Vector2): Vector2 {
+  return {
+    x: vector1.x - vector2.x,
+    y: vector1.y - vector2.y
+  };
+}
+
+/**
+ * Multiplies the origin coordinate by the vector given
+ * @param vector1 Origin Coordinate
+ * @param vector2 Vector to multiply by
+ * @returns Resulting Coordinate
+ */
+function axialMultiply(vector1: Vector2, vector2: Vector2): Vector2 {
+  return {
+    x: vector1.x * vector2.x,
+    y: vector1.y * vector2.y
   };
 }
 
@@ -396,6 +414,12 @@ function axialDiagonals(vector: Vector2): Vector2[] {
   return result;
 }
 
+/**
+ * Calculates the distance between the origin and destination coordinates
+ * @param vector1 Origin Coordinate
+ * @param vector2 Destination Coordinate
+ * @returns Resulting Distance
+ */
 function axialDistance(vector1: Vector2, vector2: Vector2): number {
   let vector1c = axialToCubic(vector1);
   let vector2c = axialToCubic(vector2);
@@ -425,6 +449,8 @@ export {
   // Functions
   axialNeighbor,
   axialAdd,
+  axialSubtract,
+  axialMultiply,
   axialNeighbors,
   axialDiagonal,
   axialDiagonals,
