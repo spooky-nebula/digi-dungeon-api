@@ -1,9 +1,10 @@
-import { roll, RollRequestData } from '../util/dicerolling';
+import { roll } from '../util/dicerolling';
+import { RollRequestData } from '../util/dicerolling';
 import * as ddapi from '../index';
 import { CreateElementRequest } from '../auth/homebrewdata';
 import Class from '../sheets/fifthEdition/class';
 
-export default function Test() {
+export function diceRollTest(): TestResult {
   let diceRequest: RollRequestData = {
     dieQuantity: 2,
     dieType: 12,
@@ -18,14 +19,24 @@ export default function Test() {
       diceRequest.dieType != result.dieType ||
       diceRequest.modifier != result.modifier
     ) {
-      console.error('Dice Rolling failed miserably');
+      return {
+        success: false,
+        message: '\ndiceRollTest\n Dice Rolling failed miserably'
+      };
     }
   });
 
+  return { success: true };
+}
+
+export function sheetCreateTest(): TestResult {
   try {
     let sheet = new ddapi.E5.Sheet.Sheet();
   } catch (error) {
-    console.error('Sheet creation failed successfully');
+    return {
+      success: false,
+      message: '\nsheetCreateTest\n Sheet creation failed successfully'
+    };
   }
 
   let homebrewRequestPreTest: CreateElementRequest<Class> = {
@@ -53,10 +64,11 @@ export default function Test() {
     homebrewRequestClass.newElementData.basic.name !=
     homebrewRequestPreTest.newElementData.basic.name
   ) {
-    console.error("Request doesn't match the original, something went wrong.");
+    return {
+      success: false,
+      message:
+        "\nsheetCreateTest\n Request doesn't match the original, something went wrong."
+    };
   }
-
-  console.log('Tests successful');
+  return { success: true };
 }
-
-Test();

@@ -12,7 +12,7 @@
     "index.js"
   ],
   "scripts": {
-    "test": "node dist-dev/tests/index.js",
+    "test": "node dist-dev/tests/index.test.js",
     "build": "tsc",
     "watch": "tsc --watch",
     "prepublish": "tsc --project tsconfig.build.json  | npm pack"
