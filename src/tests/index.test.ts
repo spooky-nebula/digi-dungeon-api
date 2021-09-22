@@ -1,6 +1,8 @@
 import config from './test.config';
 
 export default function Test() {
+  console.log('Running various tests, might take a while\n');
+
   let testResultList: TestResult[] = new Array(config.tests.length);
   let testsPassed = 0,
     testsFailed = 0;
@@ -35,8 +37,10 @@ export default function Test() {
 
   if (testsFailed == 0) {
     console.log('All tests completed successfully');
+    process.exit(0);
   } else {
     console.log('Some tests failed, check console output');
+    process.exit(1);
   }
 }
 

@@ -216,10 +216,17 @@ function cubicDistance(vector1: Vector3, vector2: Vector3): number {
   );
 }
 
+/**
+ * Calculates the vectors that would compose a line between two vectors,
+ * Includes the orign and destination
+ * @param vector1 Origin Coordinate
+ * @param vector2 Destination Coordinate
+ * @returns Array of Vectors
+ */
 function cubicLine(vector1: Vector3, vector2: Vector3): Vector3[] {
   let distance = cubicDistance(vector1, vector2);
   let result: Vector3[] = new Array(distance);
-  for (let i = 0; i < distance; i++) {
+  for (let i = 0; i <= distance; i++) {
     result[i] = vector3round(vector3lerp(vector1, vector2, (1 / distance) * i));
   }
   return result;
@@ -426,11 +433,17 @@ function axialDistance(vector1: Vector2, vector2: Vector2): number {
   return cubicDistance(vector1c, vector2c);
 }
 
-// WARNING: UNTESTED FUNCTION
+/**
+ * Calculates the vectors that would compose a line between two vectors,
+ * Includes the orign and destination
+ * @param vector1 Origin Coordinate
+ * @param vector2 Destination Coordinate
+ * @returns Array of Vectors
+ */
 function axialLine(vector1: Vector2, vector2: Vector2): Vector2[] {
   let distance = axialDistance(vector1, vector2);
   let result: Vector2[] = new Array(distance);
-  for (let i = 0; i < distance; i++) {
+  for (let i = 0; i <= distance; i++) {
     result[i] = vector2round(vector2lerp(vector1, vector2, (1 / distance) * i));
   }
   return result;
