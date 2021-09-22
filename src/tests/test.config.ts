@@ -2,7 +2,8 @@ import { rhombusGeneratorTest } from './hexgrid.test';
 import {
   axialToCubicTest,
   cubicToAxialTest,
-  lineDrawingTest
+  lineDrawingTest,
+  rangeTest
 } from './math.test';
 import { diceRollTest, sheetCreateTest } from './sheet.test';
 
@@ -17,7 +18,8 @@ const config = {
     // Hexagonal Maths
     cubicToAxialTest,
     axialToCubicTest,
-    lineDrawingTest
+    lineDrawingTest,
+    rangeTest
   ] as TestFunction[]
 };
 

@@ -24,6 +24,8 @@ function cubicToAxial(vector: Vector3): Vector2 {
  * @returns Cubic Coordinates
  */
 function axialToCubic(vector: Vector2): Vector3 {
+  // x + y + z = 0 <=>
+  // y = - x - z
   let x = vector.x;
   let z = vector.y;
   let y = -x - z;
@@ -232,6 +234,36 @@ function cubicLine(vector1: Vector3, vector2: Vector3): Vector3[] {
   return result;
 }
 
+/**
+ * Calculates the vectors in range of the orign
+ * @param origin Origin Coordinate
+ * @param radius Range
+ * @returns
+ */
+function cubicRange(origin: Vector3, radius: number): Vector3[] {
+  let result = new Array<Vector3>();
+  // Maths lol, figure it out
+  //for (let x = -radius; -radius <= x && x <= radius; x++) {
+  //  let miny = Math.max(-radius, -x - radius);
+  //  let maxy = Math.max(radius, -x + radius);
+  //  for (let y = miny; miny <= y && y <= maxy; y++) {
+  //    let position = cubicAdd(origin, { x: x, y: -x - y, z: y });
+  //    result.push(position);
+  //  }
+  //}
+  for (let x = -radius; -radius <= x && x <= radius; x++) {
+    for (let y = -radius; -radius <= y && y <= radius; y++) {
+      for (let z = -radius; -radius <= z && z <= radius; z++) {
+        if (x + y + z == 0) {
+          let position = cubicAdd(origin, { x: x, y: y, z: z });
+          result.push(position);
+        }
+      }
+    }
+  }
+  return result;
+}
+
 export {
   // Types
   CubicDirection,
@@ -251,7 +283,8 @@ export {
   cubicDiagonal,
   cubicDiagonals,
   cubicDistance,
-  cubicLine
+  cubicLine,
+  cubicRange
 };
 
 //#endregion
@@ -449,6 +482,26 @@ function axialLine(vector1: Vector2, vector2: Vector2): Vector2[] {
   return result;
 }
 
+/**
+ * Calculates the vectors in range of the orign
+ * @param origin Origin Coordinate
+ * @param radius Range
+ * @returns
+ */
+function axialRange(origin: Vector2, radius: number): Vector2[] {
+  let result = new Array<Vector2>();
+  //// Maths lol, figure it out
+  for (let r = -radius; -radius <= r && r <= radius; r++) {
+    let minq = Math.max(-radius, -r - radius);
+    let maxq = Math.min(+radius, -r + radius);
+    for (let q = minq; minq <= q && q <= maxq; q++) {
+      let position = axialAdd(origin, { x: q, y: r });
+      result.push(position);
+    }
+  }
+  return result;
+}
+
 export {
   // Types
   AxialDirection,
@@ -468,7 +521,8 @@ export {
   axialDiagonal,
   axialDiagonals,
   axialDistance,
-  axialLine
+  axialLine,
+  axialRange
 };
 
 //#endregion

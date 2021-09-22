@@ -17,6 +17,16 @@ function isOdd(n: number): boolean {
 }
 
 /**
+ * Removes duplicates from array
+ * @param array Source
+ * @returns
+ */
+function removeDuplicates(array: any[]): any[] {
+  let blackMagicSet = [...new Set(array)];
+  return blackMagicSet;
+}
+
+/**
  * Calculates linear interpolation between a and b
  * @param a Origin
  * @param b Destination

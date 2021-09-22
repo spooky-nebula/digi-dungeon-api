@@ -1,3 +1,4 @@
+import { axialAdd, axialRange } from '../util/math/hexagonal';
 import { Vector2 } from '../util/structs';
 import { Hex } from './hexgrid';
 
@@ -20,4 +21,18 @@ function generateRhombus(width: number, height: number): Hex<Vector2>[] {
   return result;
 }
 
-export { generateRhombus };
+function generateHexagon(
+  radius: number,
+  centre: Vector2 = { x: radius, y: radius }
+): Hex<Vector2>[] {
+  let vectors = axialRange(centre, radius);
+  let result = new Array<Hex<Vector2>>(vectors.length);
+
+  vectors.map((element, index) => {
+    result[index] = new Hex<Vector2>(element, 0);
+  });
+
+  return result;
+}
+
+export { generateRhombus, generateHexagon };

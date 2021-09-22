@@ -2,12 +2,19 @@ import { Hex, HexGrid } from '../map';
 import { generateRhombus } from '../map/generators';
 import {
   axialLine,
+  axialRange,
   axialToCubic,
   cubicLine,
+  cubicRange,
   cubicToAxial
 } from '../util/math/hexagonal';
 import { Vector2, Vector3 } from '../util/structs';
-import { objectsAreEqual } from './test.utils';
+import {
+  arraysAreEqual,
+  createBoolTable,
+  drawBoolTableInConsole,
+  objectsAreEqual
+} from './test.utils';
 
 export function axialToCubicTest(): TestResult {
   let testVectors: Vector2[] = [
@@ -129,6 +136,55 @@ export function lineDrawingTest(): TestResult {
       success: false,
       message:
         "\nlineDrawingTest\n Result line doesn' include expected hex in AXIAL ACROSS line drawing"
+    };
+  }
+
+  return { success: true };
+}
+
+export function rangeTest(): TestResult {
+  // AXIAL RANGE
+  // Centre of range
+  let originHex1: Hex<Vector2> = new Hex<Vector2>({ x: 0, y: 0 });
+  let result1 = axialRange(originHex1.position, 2);
+  // Convert to boolean table for easier lookup
+  let table1 = createBoolTable(result1);
+  let expectation1 = [
+    [false, false, true, true, true],
+    [false, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, false],
+    [true, true, true, false, false]
+  ];
+  if (!arraysAreEqual(table1, expectation1)) {
+    return {
+      success: false,
+      message:
+        "\nrangeTest\n Resulting range doesn't match expected result in AXIAL RANGE"
+    };
+  }
+  // CUBIC RANGE
+  // Centre of range
+  let originHex2: Hex<Vector3> = new Hex<Vector3>({ x: 0, y: 0, z: 0 });
+  let result2 = cubicRange(originHex2.position, 2);
+  // Cubic array to Axial with map
+  let result2a = result2.map((element) => {
+    return cubicToAxial(element);
+  });
+  // Convert to boolean table for easier lookup
+  let table2 = createBoolTable(result2a);
+  let expectation2 = [
+    [false, false, true, true, true],
+    [false, true, true, true, true],
+    [true, true, true, true, true],
+    [true, true, true, true, false],
+    [true, true, true, false, false]
+  ];
+  if (!arraysAreEqual(table2, expectation2)) {
+    return {
+      success: false,
+      message:
+        "\nrangeTest\n Resulting range doesn't match expected result in CUBIC RANGE"
     };
   }
 
