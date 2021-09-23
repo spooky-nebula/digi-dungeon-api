@@ -1,11 +1,12 @@
 import PartyMember from './party';
 import Event from './event';
-import { TileGrid } from './map';
+import { Board, Hex, HexGrid } from './map';
+import { Vector2 } from './util/structs';
 
 interface Shard {
   id: string;
   partyList: PartyMember[];
-  map: TileGrid;
+  map: Board;
   gamelog: Event[];
 }
 
@@ -13,7 +14,7 @@ class Shard {
   constructor() {
     this.id = 'universal';
     this.partyList = [];
-    this.map = new TileGrid();
+    this.map = new Board();
     this.gamelog = [];
   }
 }
@@ -24,7 +25,7 @@ export { Shard };
 interface SimpleShardData {
   id: string;
   partyList: PartyMember[];
-  map: TileGrid;
+  map: Board;
   gamelog: Event[];
 }
 
@@ -32,7 +33,7 @@ class SimpleShardData {
   constructor(shard?: Shard) {
     this.id = shard?.id || 'universal';
     this.partyList = shard?.partyList || [];
-    this.map = shard?.map || new TileGrid();
+    this.map = shard?.map || new Board();
     this.gamelog = shard?.gamelog || [];
   }
 }
