@@ -1,4 +1,4 @@
-import { rhombusGeneratorTest } from './hexgrid.test';
+import { pathfindTest, rhombusGeneratorTest } from './hexgrid.test';
 import {
   axialToCubicTest,
   cubicToAxialTest,
@@ -15,6 +15,8 @@ const config = {
     sheetCreateTest,
     // Generator and importers
     rhombusGeneratorTest,
+    // Map maths
+    pathfindTest,
     // Hexagonal Maths
     cubicToAxialTest,
     axialToCubicTest,

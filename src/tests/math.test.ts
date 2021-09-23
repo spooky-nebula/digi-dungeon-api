@@ -77,8 +77,6 @@ export function cubicToAxialTest(): TestResult {
 }
 
 export function lineDrawingTest(): TestResult {
-  // Generate the map with Rhombus
-  let hexGrid: HexGrid<Vector2> = new HexGrid(generateRhombus(6, 6));
   // AXIAL ROW
   // Select 2 hex in the same row
   let hex1: Hex<Vector2> = new Hex<Vector2>({ x: 0, y: -2 });

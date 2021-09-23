@@ -1,7 +1,12 @@
-import { generateRhombus } from '../map/generators';
-import { Hex } from '../map';
+import { generateHexagon, generateRhombus } from '../map/generators';
+import { Hex, HexGrid } from '../map';
 import { Vector2 } from '../util/structs';
-import { objectsAreEqual } from './test.utils';
+import {
+  createBoolTable,
+  drawBoolTableInConsole,
+  objectsAreEqual
+} from './test.utils';
+import { findNeighbors, pathfind } from '../util/math/hexgrid';
 
 export function rhombusGeneratorTest(): TestResult {
   let hexGrid: Hex<Vector2>[] = generateRhombus(7, 7);
@@ -83,6 +88,25 @@ export function rhombusGeneratorTest(): TestResult {
         message: '\nrhombusGeneratorTest\n Rhombus is not like expected'
       };
     }
+  }
+
+  return { success: true };
+}
+
+export function pathfindTest(): TestResult {
+  let hexgrid: HexGrid<Hex<Vector2>> = new HexGrid(
+    generateHexagon(3, { x: 0, y: 0 })
+  );
+
+  const origin: Hex<Vector2> = hexgrid.get(0, 3) as Hex<Vector2>;
+  const destination: Hex<Vector2> = hexgrid.get(-2, 0) as Hex<Vector2>;
+  let pathfinded: Hex<Vector2>[] = pathfind(hexgrid, origin, destination);
+
+  if (pathfinded.length != 6) {
+    return {
+      success: false,
+      message: '\npathfindTest\n Pathfinded path is not the expected length'
+    };
   }
 
   return { success: true };
