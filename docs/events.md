@@ -29,14 +29,14 @@ interface Event {
 
 @SubjectToChange // This isn't really tested or worked on so good luck
 
-| Interface Name             | Event Name                  | Parameters                                                       | Notes |
-| -------------------------- | --------------------------- | ---------------------------------------------------------------- | ----- |
-| DrawingAddEvent            | `'drawing-add'`             | `{finishedLine: DrawingLine}`                                    |
-| DrawingUndoEvent           | `'drawing-clear'`           | `{all: boolean}`                                                 |
-| DrawingClearEvent          | `'drawing-undo'`            | `{}`                                                             |
-| EntityMoveEvent            | `'entity-move'`             | `{entityID: number}`                                             |
-| EntityCreateEvent&lt;T&gt; | `'entity-create'`           | `{entityID: number, newEntityData?: T}`                          |       |
-| EntityModifyEvent&lt;T&gt; | `'entity-modify'`           | `{entityID: number, newEntityData?: T}`                          |       |
-| EntityRemoveEvent          | `'entity-remove'`           | `{entityID: number}`                                             |
-| EntityGrantPermissionEvent | `'entity-grant-permission'` | `{partyMemberID: number; entityID: number; permission: string;}` |
-| GrantPermissionEvent       | `'grant-permission'`        | `{partyMemberID: number; permission: string;}`                   |
+| Interface Name             | Event Name                  | Parameters                                                     | Notes |
+| -------------------------- | --------------------------- | -------------------------------------------------------------- | ----- |
+| DrawingAddEvent            | `'drawing-add'`             | `{finishedLine: DrawingLine}`                                  |
+| DrawingUndoEvent           | `'drawing-clear'`           | `{all: boolean}`                                               |
+| DrawingClearEvent          | `'drawing-undo'`            | `{}`                                                           |
+| EntityMoveEvent            | `'entity-move'`             | `{entity: Entity}`                                             |
+| EntityCreateEvent&lt;T&gt; | `'entity-create'`           | `{entity: Entity, newEntityData?: T}`                          |       |
+| EntityModifyEvent&lt;T&gt; | `'entity-modify'`           | `{entity: Entity, newEntityData?: T}`                          |       |
+| EntityRemoveEvent          | `'entity-remove'`           | `{entity: Entity}`                                             |
+| EntityGrantPermissionEvent | `'entity-grant-permission'` | `{partyMemberID: number; entity: Entity; permission: string;}` |
+| GrantPermissionEvent       | `'grant-permission'`        | `{partyMemberID: number; permission: string;}`                 |

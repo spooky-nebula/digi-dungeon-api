@@ -112,7 +112,7 @@ a simple structure:
 interface Shard {
   id: string; // For internal server management
   partyList: PartyMember[]; // List of users connected
-  map: TileGrid; // Map Data
+  map: Board; // Map Data
   gamelog: Event[]; // All server recorded events
   sheetIds: string[]; // Used to get a character sheet from the homebrew
 }
@@ -126,7 +126,7 @@ following this interface:
 interface SimpleShardData {
   id: string;
   partyList: PartyMember[];
-  map: TileGrid;
+  map: Board;
   gamelog: Event[];
   sheetIds: string[];
 }
@@ -138,6 +138,9 @@ less bandwidth.
 
 The processing of this data can be found on the (non-existent) documentation
 for **digi-dungeon-client**.
+
+Information about the map data can be found in
+[the board documentation](board.md).
 
 # Authentication
 
