@@ -1,5 +1,9 @@
 # Changes
 
+## 0.1.22
+
+- Added shadows to ObjectEntities
+
 ## 0.1.21
 
 - Added various maths functions
