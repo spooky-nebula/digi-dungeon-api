@@ -1,6 +1,6 @@
 # Changes
 
-## 0.1.19
+## 0.1.21
 
 - Added various maths functions
   - Axial and Cubic coordinate maths
@@ -11,6 +11,7 @@
 - Added some map generators
 - Added some Queue type structs
 - Added basic Entity Types
+- Skipped the other versions
 
 ## 0.1.18
 
