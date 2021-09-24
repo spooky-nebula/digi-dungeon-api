@@ -6,6 +6,7 @@ interface Tile {
   type: TileType;
 }
 
+/** @deprecated Replaced with Hex<T> */
 class Tile {
   constructor(
     pos: Vector3 = { x: 0, y: 0, z: 0 },
@@ -21,6 +22,7 @@ class Tile {
 export default Tile;
 export { Tile };
 
+/** @deprecated Replaced with HexType */
 enum TileType {
   Grass = 1,
   Cobble = 2,

@@ -34,16 +34,34 @@ class UserLogoutData {
   }
 }
 
-interface AuthRequestResponse {
+interface AuthResponse {
   success: boolean;
   token?: string;
+  message?: string;
 }
 
-class AuthRequestResponse {
-  constructor(success: boolean, token?: string) {
+class AuthResponse {
+  constructor(success: boolean, token?: string, message?: string) {
     this.success = success;
+    this.token = token;
+    this.message = message;
+  }
+}
+
+interface AuthRequest {
+  token: string;
+}
+
+class AuthRequest {
+  constructor(token: string) {
     this.token = token;
   }
 }
 
-export { AuthRequestResponse, UserRegisterData, UserLoginData, UserLogoutData };
+export {
+  AuthRequest,
+  AuthResponse,
+  UserRegisterData,
+  UserLoginData,
+  UserLogoutData
+};

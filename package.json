@@ -1,6 +1,6 @@
 {
   "name": "digi-dungeon-api",
-  "version": "0.1.16",
+  "version": "0.1.21",
   "description": "API of digi dungeon's events, objects and other stuff.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +12,7 @@
     "index.js"
   ],
   "scripts": {
-    "test": "node dist-dev/tests/index.js",
+    "test": "node dist-dev/tests/index.test.js",
     "build": "tsc",
     "watch": "tsc --watch",
     "prepublish": "tsc --project tsconfig.build.json  | npm pack"
