@@ -13,6 +13,11 @@ class Vector2 {
     x: 0,
     y: 0
   };
+
+  static One: Vector2 = {
+    x: 1,
+    y: 1
+  };
 }
 
 interface Vector3 {
@@ -32,6 +37,12 @@ class Vector3 {
     x: 0,
     y: 0,
     z: 0
+  };
+
+  static One: Vector3 = {
+    x: 1,
+    y: 1,
+    z: 1
   };
 }
 
