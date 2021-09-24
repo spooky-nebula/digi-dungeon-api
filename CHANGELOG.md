@@ -1,5 +1,10 @@
 # Changes
 
+## 0.1.23
+
+- ObjectEntity started with Vector3.One now it starts with Vector3.Zero as well as some other stuff
+- Typo fixed lol
+
 ## 0.1.22
 
 - Added shadows to ObjectEntities

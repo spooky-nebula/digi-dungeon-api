@@ -9,9 +9,8 @@ interface ObjectEntity {
   position: Vector3;
   scale: Vector3;
   rotation: Vector3;
-  rotationAxis: Vector3;
   castShadows: boolean;
-  recieveShadows: boolean;
+  receiveShadows: boolean;
 }
 
 /**
@@ -27,12 +26,11 @@ class ObjectEntity {
     this.id = id;
     this.cloudModelLink = cloudModelLink;
     this.cloudTextureLink = cloudTextureLink;
-    this.position = initialPosition || Vector3.One;
+    this.position = initialPosition || Vector3.Zero;
     this.scale = Vector3.One;
-    this.rotation = Vector3.One;
-    this.rotationAxis = Vector3.One;
+    this.rotation = Vector3.Zero;
     this.castShadows = false;
-    this.recieveShadows = false;
+    this.receiveShadows = false;
   }
 }
 
