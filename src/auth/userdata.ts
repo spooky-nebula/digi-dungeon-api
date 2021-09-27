@@ -23,13 +23,11 @@ class UserLoginData {
 }
 
 interface UserLogoutData {
-  username: string;
   token: string;
 }
 
 class UserLogoutData {
-  constructor(username: string, token: string) {
-    this.username = username;
+  constructor(token: string) {
     this.token = token;
   }
 }
