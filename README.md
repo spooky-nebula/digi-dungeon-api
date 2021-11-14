@@ -1,12 +1,17 @@
-# Digi Dungeon Client
+# Digi Dungeon API
 
-This is the Official client for connecting to Digi Dungeon Servers. You can use this client as an example on how to create your own client!
+This is the API used by Digi-Dungeon for communication between servers and
+clients.
 
-# Building on your PC
-
-The project is built on Electron so you need NPM and Node.js (which are often bundled). This client was made in Linux but it is cross-platform so hopefully you can just run:
+This API is meant to be used to create 3rd-Party clients alike the
+digi-dungeon-client (which uses this API extensively). You can add this to your
+app using:
 
 ```bash
-$ npm install
-$ npm start
+npm install digi-dungeon-api --save
 ```
+
+The Documentation for this API is still being written but be sure to check on
+[Documentation](/docs/README.md).
+
+Still barebones but _Soon™️_.
